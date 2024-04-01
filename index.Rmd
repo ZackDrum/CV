@@ -41,8 +41,8 @@ sheet_is_publicly_readable <- TRUE
 PDF_EXPORT <- FALSE
 
 
-CV_PDF_LOC <- "https://github.com/seyoun209/cv/raw/master/cv.pdf"
-CV_HTML_LOC <- "seyoun209.github.io/cv/cv.html"
+CV_PDF_LOC <- "https://github.com/seyoun209/cv/master/Jessbyun_CV.pdf"
+CV_HTML_LOC <- "seyoun209.github.io/cv"
 
 
 # A global (gasp) variable that holds all the links that were inserted for
