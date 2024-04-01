@@ -41,7 +41,7 @@ sheet_is_publicly_readable <- TRUE
 PDF_EXPORT <- FALSE
 
 
-CV_PDF_LOC <- "https://github.com/seyoun209/cv/blob/master/Jessbyun_CV.pdf"
+CV_PDF_LOC <- "https://github.com/seyoun209/cv/raw/master/Jessbyun_CV.pdf"
 CV_HTML_LOC <- "seyoun209.github.io/cv"
 
 
