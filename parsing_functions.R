@@ -44,10 +44,9 @@ strip_links_from_cols <- function(data, cols_to_strip){
   data
 }
 
-# Take a position dataframe and the section id desired
-# and prints the section to markdown. 
 print_section <- function(position_data, section_id){
-  position_data %>% 
+  position_data %>%
+    filter(in_resume) %>%  # Add this line to filter for in_resume == TRUE
     filter(section == section_id) %>% 
     arrange(desc(end)) %>% 
     mutate(id = 1:n()) %>% 
@@ -60,16 +59,17 @@ print_section <- function(position_data, section_id){
     group_by(id) %>% 
     mutate(
       descriptions = list(description),
-      no_descriptions = is.na(first(description))
+      no_descriptions = is.na(description)
     ) %>% 
     ungroup() %>% 
     filter(description_num == 'description_1') %>% 
     mutate(
-      timeline = ifelse(
-        is.na(start) | start == end,
-        end,
-        glue('{end} - {start}')
-      ),
+      id = row_number(),
+      start = as.character(start),  # Convert start column to character
+      end = as.character(end)  # Convert end column to character
+    ) %>%
+    mutate(
+      timeline = ifelse(is.na(start) | start == end, end, glue("{end} - {start}")),
       description_bullets = ifelse(
         no_descriptions,
         ' ',
@@ -92,6 +92,7 @@ print_section <- function(position_data, section_id){
     )
 }
 
+
 # Construct a bar chart of skills
 build_skill_bars <- function(skills, out_of = 5){
   bar_color <- "#969696"
@@ -108,9 +109,19 @@ build_skill_bars <- function(skills, out_of = 5){
     )
 }
 
+
 # Prints out from text_blocks spreadsheet blocks of text for the intro and asides. 
-print_text_block <- function(text_blocks, label){
-  filter(text_blocks, loc == label)$text %>%
+print_text_block <- function(text_blocks, label) {
+  # Extract the text for the specified label
+  text <- filter(text_blocks, loc == label)$text %>%
+    # Sanitize links in the text (assuming sanitize_links() does this)
     sanitize_links() %>%
-    cat()
+    # Wrap each text block in <p> tags
+    sapply(function(block) paste0("<p>", block, "</p>")) %>%
+    # Concatenate all text blocks into a single string
+    paste(collapse = "")
+  
+  # Wrap the entire content in a <div> with class "subtitle" and print it
+  cat(text)
 }
+

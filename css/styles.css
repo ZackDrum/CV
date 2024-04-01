@@ -19,7 +19,7 @@ img {
   display: block;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1pt #fa430a57 solid;
+  border: 1pt #1E78B6 solid;
 }
 
 [data-id="main"] {
@@ -33,7 +33,7 @@ img {
   background-color: white;
   border-bottom: 1pt #dedede solid;
   width: var(--pagedjs-width);
-  height: 242px;
+  height: 200px;
   margin-top: calc(-1*var(--pagedjs-margin-top));
   margin-left: -19px;
   display: flex;
@@ -44,7 +44,7 @@ img {
 .header-block-inner {
   background-color: #fcfcfc;
   width: 100%;
-  height: 229px;
+  height: 187px;
   display: flex;
   align-items: center;
   /*justify-content: center;*/
@@ -55,25 +55,32 @@ div.title {
     font-family: "Playfair Display", serif;
     text-align: left;
     padding: 3rem;
-    font-size: 5.2rem!important;
+    font-size: 3.2rem!important;
     line-height: 1;
     display: block!important;
-    color: #e43b07;
+    color: #1E78B6;
     max-width: 52%;
 }
 
+
 .subtitle {
-    display: flex;
-    margin: 0 auto;
-    position: absolute;
-    max-width: 46.3%;
-    top: 45px;
-    right: 35px;
-    /* font-style: oblique; */
-    /* font-family: 'Playfair Display'; */
-    color: #666;
-    letter-spacing: 1pt;
-    font-size: 0.8em;
+  max-width: 60%;
+  margin: 0 auto; /* Centers the .subtitle div if it's not full width */
+  position: absolute; /* Positions the .subtitle div absolutely */
+  top: -3em; /* Adjust as needed */
+  right: 1.5em; /* Adjust as needed */
+  font-size: 0.7em; /* Sets the font size for all text in .subtitle */
+  line-height: 1.2; /* Line height for all paragraphs */
+}
+
+.subtitle > p {
+  color: #666;
+  margin-bottom: 0.5em; /* Reduced space between paragraphs */
+}
+
+.subtitle > p:first-of-type {
+  color: #1E78B6 !important; 
+  font-weight: bold; /* Bold for the first paragraph */
 }
 
 .item {
@@ -84,7 +91,7 @@ div.title {
 h1,
 h2 {
   font-family: "Playfair Display", serif;
-  color: #000;
+  color: #1E78B6;
 }
 
 h1{
@@ -96,10 +103,8 @@ h1{
 
 h2 {
   letter-spacing: 1pt;
-}
-.aside h2,
-#aside h2 {
- color: #35859f; 
+  letter-spacing: 1pt;
+  color: #1E78B6; /* Sets the color for all h2 */
 }
 
 h3 {
@@ -157,13 +162,16 @@ sup {
     position: absolute;
     z-index: 0;
     left: 0;
+    top:208px;
     width: 14rem;
     background-color: #fcfcfc;
+    top: 208px; /* Example adjustment */
+    height: calc(100% - 208px); 
 }
 
 .pagedjs_first_page .pagedjs_sheet::after {
-  height: 75.9%;
-  top: 248.1px;
+  height: calc(100% - 208px);
+  top: 208.1px;
 }
 
 .pagedjs_sheet::after {
@@ -183,21 +191,28 @@ a:hover {
 .section.level1.aside {
   height: 74.9%;
   padding-top: 1.6rem;
+  width: 12rem;
 }
 
 
-[data-id="skills"] {
-    line-height: 1.2;
+[data-id="online"] {
+    line-height: 1.3;
+    margin-top: 1; /* Adjust as needed */
+    width: 12rem;
 }
 
 [data-id="disclaimer"] {
-  position: static;
+  padding-bottom:0 /* Fixed positioning relative to the viewport */
+  bottom: 0; /* Aligns the element to the bottom of the viewport */
+  left: 0; 
   text-align: left;
   opacity: 90%;
+  width: 12rem;
+  position: absolute;
 }
 
 .aside {
-    width: var(--sidebar-width);
+    width: calc(var(--sidebar-width) + 50px); /* Adjust the value as needed */
     padding: 0.9in 5px 0.9px 10px;
     font-size: 0.8rem;
     float: left;
@@ -207,15 +222,15 @@ a:hover {
 
 [data-id="main"] {
     width: var(--main-width);
-    padding: 0 0.25in 0 0.25in;
-    font-size: 0.7rem;
+    padding: 0 0.15in 0 0.15in;
+    font-size: 10px;
     float: right;
 }
 
 #aside,
 .aside {
   z-index: 3;
-  color: #253b5e;
+  color: #243b5f;
 }
 
 #aside a{
@@ -235,10 +250,22 @@ a:hover {
   padding-top: 0.005rem;
 }
 
-/* Laptop icon isn't centered by default which is lame */
-.fa-laptop {
-  margin-left: -3px;
+
+
+[data-id="main"] h2 {
+  font-size: 14px; /* Change the font size to your desired value */
+  color: #1E78B6; /* Change the color to your desired color */
+  font-weight:750;
 }
+
+[data-id="main"] h3 {
+  font-size: 10px; /* Change the font size to your desired value */
+  text-transform: none;
+  font-weight:500;
+}
+
+
+
 
 /* When we have links at bottom in a list make sure they actually are numbered */
 #links li {
