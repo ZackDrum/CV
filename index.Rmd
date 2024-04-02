@@ -117,9 +117,14 @@ online %>%
   glue_data("- <i class='fa fa-{icon}'></i>&nbsp; {contact}")
 ```
 
+## Key skilles {#skills}
+```{r}
+print_skills(skills)
+```
+
 ## Disclaimer {#disclaimer}
 
-Source code available: [https://github.com/seyoun209/cv](https://github.com/seyoun209/cv).
+
 
 Updated: `r Sys.Date()`.
 
@@ -133,8 +138,38 @@ Updated: `r Sys.Date()`.
 print_section(position_data, 'education')
 ```
 
-## RESEARCH & WORK EXPERIENCE {data-icon="briefcase" .research}
+## RESEARCH and WORK EXPERIENCE {data-icon="briefcase" .research}
 
 ```{r}
 print_section(position_data, 'research_industry')
+```
+
+## PUBLICATION {data-icon="file-text-o" .publication}
+
+```{r}
+print_section(position_data, 'publication')
+```
+
+## Teaching experience {data-icon="chalkboard-teacher" .teaching}
+
+```{r}
+print_section(position_data, 'teaching')
+```
+
+## Leadership and Outreach {data-icon="handshake-o" .leadership}
+
+```{r}
+print_section(position_data, 'leadership')
+```
+
+## Scholarship, Traineeships, and Awards {data-icon="trophy" .awards}
+
+```{r}
+print_section(position_data, 'awards')
+```
+
+## Poster presentation {data-icon="newspaper-o" .poster}
+
+```{r}
+print_section(position_data, 'poster')
 ```

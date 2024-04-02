@@ -125,3 +125,36 @@ print_text_block <- function(text_blocks, label) {
   cat(text)
 }
 
+
+
+print_reference <- function(reference) {
+ reference %>%
+    mutate(
+      position_2 = ifelse(is.na(position_2), "", position_2), # Handle NA values in position_2
+      positions = ifelse(position_2 == "", position_1, paste(position_1, position_2, sep = "; ")), # Concatenate positions
+      email = ifelse(is.na(email), "N/A", email) # Handle NA values in email
+    ) %>%
+    rowwise() %>%
+    glue_data(
+      "{name}",
+      "\n{positions}",
+      "\n{email}",
+      "\n\n" # Add space between entries
+    ) 
+}
+
+
+
+print_skills <- function(skills) {
+  skills %>%
+    mutate(
+      skill_set = set_1
+    ) %>%
+    rowwise() %>%
+    mutate(
+      name_display = if_else(name == "NA", "", glue("{name}: \n"))
+    ) %>%
+    glue_data(
+      "{name_display}{skill_set}\n\n" # Add space between entries, only display name if not "NA", and add colon and space after the name
+    ) 
+}
