@@ -43,7 +43,6 @@ strip_links_from_cols <- function(data, cols_to_strip){
   }
   data
 }
-
 print_section <- function(position_data, section_id){
   position_data %>%
     filter(in_resume) %>%  # Add this line to filter for in_resume == TRUE
@@ -76,6 +75,66 @@ print_section <- function(position_data, section_id){
         map_chr(descriptions, ~paste('-', ., collapse = '\n'))
       )
     ) %>% 
+    strip_links_from_cols(c('title', 'description_bullets')) %>% 
+    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    glue_data(
+      "### {title}",
+      "\n\n",
+      "{loc}",
+      "\n\n",
+      "{institution}",
+      "\n\n",
+      "{timeline}", 
+      "\n\n",
+      "{description_bullets}",
+      "\n\n\n",
+    )
+}
+print_section_month <- function(position_data, section_id){
+  position_data %>%
+    filter(in_resume) %>%  # Add this line to filter for in_resume == TRUE
+    filter(section == section_id) %>% 
+    arrange(desc(end)) %>% 
+    mutate(id = 1:n()) %>% 
+    pivot_longer(
+      starts_with('description'),
+      names_to = 'description_num',
+      values_to = 'description'
+    ) %>% 
+    filter(!is.na(description) | description_num == 'description_1') %>%
+    group_by(id) %>% 
+    mutate(
+      descriptions = list(description),
+      no_descriptions = is.na(description)
+    ) %>% 
+    ungroup() %>% 
+    filter(description_num == 'description_1') %>% 
+    mutate(
+      id = row_number(),
+      start = as.character(start),  # Convert start column to character
+      end = as.character(end)  # Convert end column to character
+    ) %>%
+    mutate(
+      # Convert to dates for sorting
+      start_date = dmy(paste("01", start)),
+      end_date = dmy(paste("01", end)),
+      # Retain original format for display
+      start_display = start,
+      end_display = end
+    ) %>%
+    filter(in_resume) %>%
+    filter(section == section_id) %>%
+    arrange(desc(end_date), desc(start_date)) %>%
+    mutate(
+      id = row_number(),
+      timeline = ifelse(is.na(start_display) | start_display == end_display, 
+                        end_display, 
+                        glue("{start_display} - {end_display}")),
+      description_bullets = ifelse(
+        no_descriptions,
+        ' ',
+        map_chr(descriptions, ~paste('-', ., collapse = '\n'))
+    )) %>% 
     strip_links_from_cols(c('title', 'description_bullets')) %>% 
     mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
     glue_data(

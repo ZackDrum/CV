@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 library(glue)
 library(tidyverse)
+library(lubridate)
 
 # ======================================================================
 # These variables determine how the the data is loaded and how the exports are
@@ -171,5 +172,5 @@ print_section(position_data, 'awards')
 ## Poster presentation {data-icon="newspaper-o" .poster}
 
 ```{r}
-print_section(position_data, 'poster')
+print_section_month(position_data, 'poster')
 ```
