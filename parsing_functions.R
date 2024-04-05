@@ -207,11 +207,11 @@ print_reference <- function(reference) {
 print_skills <- function(skills) {
   skills %>%
     mutate(
-      skill_set = set_1
-    ) %>%
-    rowwise() %>%
-    mutate(
-      name_display = if_else(name == "NA", "", glue("{name}: \n"))
+      skill_set = set_1,
+      # Ensure 'name' is character, not factor, for `if_else` compatibility
+      name = as.character(name),
+      # Generate display text for each row
+      name_display = if_else(is.na(name), "", glue("{name}: \n"))
     ) %>%
     glue_data(
       "{name_display}{skill_set}\n\n" # Add space between entries, only display name if not "NA", and add colon and space after the name
