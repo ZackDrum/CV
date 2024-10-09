@@ -4,10 +4,10 @@ author: Jess Byun
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
-    css: ['css/styles.css', 'resume']
-    # set it to true for a self-contained HTML page but it'll take longer to render
+    css: ['css/styles.css', 'resume']  # Optional: CSS for HTML
     self_contained: FALSE
-    knit: pagedown::chrome_print
+  pagedown::chrome_print:
+    css: ['css/styles.css', 'resume']  # Optional: CSS for PDF
 ---
 
 ```{r, include=FALSE}
@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 library(glue)
 library(tidyverse)
 library(lubridate)
+library(pagedown)
 
 # ======================================================================
 # These variables determine how the the data is loaded and how the exports are
@@ -63,11 +64,11 @@ source('gather_data.R')
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
-if(PDF_EXPORT){
+if (PDF_EXPORT) {
   cat("
   <style>
-  :root{
-    --decorator-outer-offset-left: -6.5px;
+  :root {
+    --decorator-outer-offset-left: -6.5px; /* Adjusts alignment for PDF export */
   }
   </style>")
 }
@@ -178,5 +179,5 @@ print_section_month(position_data, 'poster')
 ## Oral presentation {data-icon=microphone-alt .oral}
 
 ```{r}
-print_section_month(position_data, 'oral')
+print_section_oral(position_data, 'oral')
 ```
