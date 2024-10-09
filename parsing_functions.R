@@ -43,12 +43,12 @@ strip_links_from_cols <- function(data, cols_to_strip){
   }
   data
 }
-print_section <- function(position_data, section_id){
+print_section <- function(position_data, section_id) {
   position_data %>%
-    filter(in_resume) %>%  # Add this line to filter for in_resume == TRUE
+    filter(in_resume) %>%  
     filter(section == section_id) %>% 
     arrange(desc(end)) %>% 
-    mutate(id = 1:n()) %>% 
+    mutate(id = 1:n()) %>%
     pivot_longer(
       starts_with('description'),
       names_to = 'description_num',
@@ -60,12 +60,12 @@ print_section <- function(position_data, section_id){
       descriptions = list(description),
       no_descriptions = is.na(description)
     ) %>% 
-    ungroup() %>% 
+    ungroup() %>%
     filter(description_num == 'description_1') %>% 
     mutate(
       id = row_number(),
-      start = as.character(start),  # Convert start column to character
-      end = as.character(end)  # Convert end column to character
+      start = as.character(start),  
+      end = as.character(end)  
     ) %>%
     mutate(
       timeline = ifelse(is.na(start) | start == end, end, glue("{end} - {start}")),
@@ -77,6 +77,10 @@ print_section <- function(position_data, section_id){
     ) %>% 
     strip_links_from_cols(c('title', 'description_bullets')) %>% 
     mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    # Handle the glue_data part with the necessary columns
+    # Convert list column to a character string for glue_data
+    mutate(descriptions = map_chr(descriptions, ~ paste(.x, collapse = "\n"))) %>%
+    # Use glue_data for the final formatting
     glue_data(
       "### {title}",
       "\n\n",
@@ -87,10 +91,11 @@ print_section <- function(position_data, section_id){
       "{timeline}", 
       "\n\n",
       "{description_bullets}",
-      "\n\n\n",
+      "\n\n\n"
     )
 }
-print_section_month <- function(position_data, section_id){
+
+print_section_month <- function(position_data, section_id) {
   position_data %>%
     filter(in_resume) %>%  # Add this line to filter for in_resume == TRUE
     filter(section == section_id) %>% 
@@ -122,21 +127,21 @@ print_section_month <- function(position_data, section_id){
       start_display = start,
       end_display = end
     ) %>%
-    filter(in_resume) %>%
-    filter(section == section_id) %>%
     arrange(desc(end_date), desc(start_date)) %>%
     mutate(
-      id = row_number(),
       timeline = ifelse(is.na(start_display) | start_display == end_display, 
                         end_display, 
                         glue("{start_display} - {end_display}")),
       description_bullets = ifelse(
         no_descriptions,
         ' ',
-        map_chr(descriptions, ~paste('-', ., collapse = '\n'))
-    )) %>% 
+        map_chr(descriptions, ~ paste('-', ., collapse = '\n'))  # Ensure we handle lists properly
+      )
+    ) %>% 
     strip_links_from_cols(c('title', 'description_bullets')) %>% 
     mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    # Convert list column to a character string for glue_data
+    mutate(description_bullets = paste(description_bullets, collapse = "\n")) %>%
     glue_data(
       "### {title}",
       "\n\n",
@@ -147,7 +152,7 @@ print_section_month <- function(position_data, section_id){
       "{timeline}", 
       "\n\n",
       "{description_bullets}",
-      "\n\n\n",
+      "\n\n\n"
     )
 }
 
