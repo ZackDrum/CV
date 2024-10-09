@@ -179,5 +179,5 @@ print_section_month(position_data, 'poster')
 ## Oral presentation {data-icon=microphone-alt .oral}
 
 ```{r}
-print_section_oral(position_data, 'oral')
+print_section(position_data, 'oral')
 ```

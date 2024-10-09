@@ -95,66 +95,6 @@ print_section <- function(position_data, section_id) {
     )
 }
 
-print_section_oral <- function(position_data, section_id) {
-  position_data %>%
-    filter(in_resume, section == section_id) %>%
-    arrange(desc(end)) %>%
-    mutate(id = 1:n()) %>%
-    pivot_longer(
-      starts_with('description'),
-      names_to = 'description_num',
-      values_to = 'description'
-    ) %>%
-    filter(!is.na(description) | description_num == 'description_1') %>%
-    group_by(id) %>%
-    mutate(
-      descriptions = list(description),
-      no_descriptions = is.na(description)
-    ) %>%
-    ungroup() %>%
-    filter(description_num == 'description_1') %>%
-    arrange(desc(end), desc(start)) %>%
-    mutate(
-      start_display = as.character(start),
-      end_display = as.character(end)
-    ) %>%
-    mutate(
-      timeline = ifelse(is.na(start_display) | start_display == end_display, 
-                        end_display, 
-                        glue("{start_display} - {end_display}")),
-      description_bullets = ifelse(
-        no_descriptions,
-        ' ',
-        {
-          unique_descriptions <- unique(unlist(descriptions))  # Ensure unique descriptions
-          cat("Unique descriptions:", unique_descriptions, "\n")  # Debugging output
-          paste('-', unique_descriptions, collapse = '\n')  # Combine unique descriptions into bullet points
-        }
-      )
-    ) %>%
-    strip_links_from_cols(c('title', 'description_bullets')) %>%
-    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>%
-    # Ensure we only grab the unique title and other columns
-    reframe(
-      title = unique(title),
-      loc = unique(loc),
-      institution = unique(institution),
-      timeline = unique(timeline),
-      description_bullets = description_bullets  # Use the modified description_bullets
-    ) %>%
-    glue_data(
-      "### {title}",
-      "\n\n",
-      "{loc}",
-      "\n\n",
-      "{institution}",
-      "\n\n",
-      "{timeline}", 
-      "\n\n",
-      "{description_bullets}",
-      "\n\n\n"
-    )
-}
 
 print_section_month <- function(position_data, section_id) {
   position_data %>%
