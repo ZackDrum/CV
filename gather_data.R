@@ -23,7 +23,7 @@ if(using_googlesheets){
   online        <- read_sheet(positions_sheet_loc, sheet = "contact_info",skip = 1)
   text_blocks   <- read_sheet(positions_sheet_loc, sheet = "text_blocks",skip = 1)
   contact_info  <- read_sheet(positions_sheet_loc, sheet = "contact_info", skip = 1)
-  laboratory_skills  <- read_sheet(positions_sheet_loc, sheet = "laboratory_laboratory_skills", skip = 1)
+  laboratory_skills  <- read_sheet(positions_sheet_loc, sheet = "laboratory_skills", skip = 1)
   
 } else {
   
