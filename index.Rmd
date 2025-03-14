@@ -44,7 +44,7 @@ PDF_EXPORT <- TRUE
 
 
 CV_PDF_LOC <- "https://github.com/zdrum/cv/raw/master/ZackDrum_CV.pdf"
-CV_HTML_LOC <- "zdrum.github.io/cv"
+CV_HTML_LOC <- "zdrum.github.io/CV"
 
 
 # A global (gasp) variable that holds all the links that were inserted for
