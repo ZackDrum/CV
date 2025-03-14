@@ -119,9 +119,9 @@ online %>%
   glue_data("- <i class='fa fa-{icon}'></i>&nbsp; {contact}")
 ```
 
-## Key skilles {#skills}
+## Key skilles {#laboratory_skills}
 ```{r}
-print_skills(skills)
+print_laboratory_skills(laboratory_skills)
 ```
 
 ## Disclaimer {#disclaimer}
