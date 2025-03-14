@@ -23,13 +23,12 @@ if(using_googlesheets){
   online        <- read_sheet(positions_sheet_loc, sheet = "contact_info",skip = 1)
   text_blocks   <- read_sheet(positions_sheet_loc, sheet = "text_blocks",skip = 1)
   contact_info  <- read_sheet(positions_sheet_loc, sheet = "contact_info", skip = 1)
-  skills  <- read_sheet(positions_sheet_loc, sheet = "laboratory_skills", skip = 1)
+  laboratory_skills  <- read_sheet(positions_sheet_loc, sheet = "laboratory_laboratory_skills", skip = 1)
   
 } else {
   
   # Want to go oldschool with just a csv?
   position_data <- read_csv("csvs/positions.csv")
-  skills        <- read_csv("csvs/language_skills.csv")
   text_blocks   <- read_csv("csvs/text_blocks.csv")
   contact_info  <- read_csv("csvs/contact_info.csv", skip = 1)
   
