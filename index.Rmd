@@ -1,6 +1,6 @@
 ---
-title: "Jess Byun's CV"
-author: Jess Byun
+title: "Zachary Drum's CV"
+author: Zachary Drum
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
@@ -30,7 +30,7 @@ library(pagedown)
 using_googlesheets <- TRUE
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1ox69zWlh0n59UwC_fWjuh1HKY7WLGCBPWV2R8lD1kvQ/edit?usp=sharing"
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1M1skpSNlEirOKdt19dtzd12Xrshi2xEZkhnv7EqiYZM/edit?usp=sharing"
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -43,8 +43,8 @@ sheet_is_publicly_readable <- TRUE
 PDF_EXPORT <- TRUE
 
 
-CV_PDF_LOC <- "https://github.com/seyoun209/cv/raw/master/Jessbyun_CV.pdf"
-CV_HTML_LOC <- "seyoun209.github.io/cv"
+CV_PDF_LOC <- "https://github.com/zdrum/cv/raw/master/ZackDrum_CV.pdf"
+CV_HTML_LOC <- "zdrum.github.io/cv"
 
 
 # A global (gasp) variable that holds all the links that were inserted for
@@ -77,7 +77,7 @@ if (PDF_EXPORT) {
 ::: header-block
 ::: header-block-inner
 ::: title
-Jess Byun
+Zachary Drum
 :::
 :::
 :::
@@ -132,7 +132,7 @@ Updated: `r Sys.Date()`.
 
 # Main
 
-## Jess Byun {#title}
+## Zachary Drum {#title}
 
 ## Education {data-icon="graduation-cap" .education }
 
