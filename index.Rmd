@@ -140,28 +140,40 @@ Updated: `r Sys.Date()`.
 print_section(position_data, 'education')
 ```
 
-## RESEARCH and WORK EXPERIENCE {data-icon="briefcase" .research}
+## RESEARCH EXPERIENCE {data-icon="briefcase" .research}
 
 ```{r}
-print_section(position_data, 'research_industry')
+print_section(position_data, 'research_positions')
 ```
 
-## PUBLICATION {data-icon="file-text-o" .publication}
+## TEACHING EXPERIENCE {data-icon="chalkboard-teacher" .teaching}
 
 ```{r}
-print_section(position_data, 'publication')
+print_section(position_data, 'research_positions')
 ```
 
-## Teaching experience {data-icon="chalkboard-teacher" .teaching}
+## INDUSTRY EXPERIENCE {data-icon="briefcase" .research}
 
 ```{r}
-print_section(position_data, 'teaching')
+print_section(position_data, 'industry_positions')
 ```
 
-## Leadership and Outreach {data-icon="handshake-o" .leadership}
+## PUBLICATION IN PRESS {data-icon="file-text-o" .publication}
 
 ```{r}
-print_section(position_data, 'leadership')
+print_section(position_data, 'in_press_academic_articles')
+```
+
+## PUBLICATION IN REVIEW {data-icon="file-text-o" .publication}
+
+```{r}
+print_section(position_data, 'in_review_academic_articles')
+```
+
+## PUBLICATION IN PREP {data-icon="file-text-o" .publication}
+
+```{r}
+print_section(position_data, 'in_prep_academic_articles')
 ```
 
 ## Scholarship, Traineeships, and Awards {data-icon="trophy" .awards}
@@ -170,14 +182,16 @@ print_section(position_data, 'leadership')
 print_section(position_data, 'awards')
 ```
 
-## Poster presentation {data-icon="newspaper-o" .poster}
-
-```{r}
-print_section_month(position_data, 'poster')
-```
-
 ## Oral presentation {data-icon=microphone-alt .oral}
 
 ```{r}
-print_section(position_data, 'oral')
+print_section(position_data, 'oral_presentations')
 ```
+
+## Poster presentation {data-icon="newspaper-o" .poster}
+
+```{r}
+print_section_month(position_data, 'poster_presentations')
+```
+
+
