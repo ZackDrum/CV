@@ -157,11 +157,11 @@ print_section_month <- function(position_data, section_id) {
     )
 }
 
-# Construct a bar chart of skills
-build_skill_bars <- function(skills, out_of = 5){
+# Construct a bar chart of laboratory_skills
+build_skill_bars <- function(laboratory_skills, out_of = 5){
   bar_color <- "#969696"
   bar_background <- "#d9d9d9"
-  skills %>% 
+  laboratory_skills %>% 
     mutate(width_percent = round(100*level/out_of)) %>% 
     glue_data(
       "<div class = 'skill-bar'",
@@ -209,8 +209,8 @@ print_reference <- function(reference) {
 
 
 
-print_skills <- function(skills) {
-  skills %>%
+print_laboratory_skills <- function(laboratory_skills) {
+  laboratory_skills %>%
     mutate(
       skill_set = set_1,
       # Ensure 'name' is character, not factor, for `if_else` compatibility
