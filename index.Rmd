@@ -92,9 +92,9 @@ Zachary Drum
 ```
 :::
 
-# Aside
+# Aside (delete headshop)
 
-![headshot](Headshot.jpg){width=90%}
+#![headshot](Headshot.jpg){width=90%}
 
 ```{r}
 # When in export mode the little dots are unaligned, so fix that. 
